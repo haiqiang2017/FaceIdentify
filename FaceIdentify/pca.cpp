@@ -54,7 +54,7 @@ double calcPCAOrientation(vector<Point> &pts, Mat &image)
 		   static_cast<int>(pca_analysis.mean.at<double>(0,1)));
 
 	circle(image, cnt, 2, Scalar(0, 255, 0), 2, 8, 0);
-
+	//STLºº ı
 	vector<Point2d> vecs(2);
 	vector<double>	vals(2);
 	for (int i = 0; i < 2; i++)
