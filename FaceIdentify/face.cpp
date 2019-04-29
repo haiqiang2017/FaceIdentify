@@ -30,6 +30,7 @@ int main(int argc, char** argv)
 			}
 		}
 	}
+
 	namedWindow("black image", CV_WINDOW_AUTOSIZE);
 	imshow("black image", src);
 
