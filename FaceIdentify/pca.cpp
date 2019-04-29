@@ -39,6 +39,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+
 double calcPCAOrientation(vector<Point> &pts, Mat &image)
 {
 	int size = static_cast<int>(pts.size());
