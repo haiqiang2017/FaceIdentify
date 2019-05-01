@@ -4,7 +4,7 @@ using namespace std;
 using namespace cv;
 
 double calcPCAOrientation(vector<Point> &pts, Mat &image);
-int main(int argc, char** argv)
+int main3(int argc, char** argv)
 {
 	Mat src = imread("D:/test/test.jpg");
 	if (src.empty())
@@ -49,22 +49,23 @@ double calcPCAOrientation(vector<Point> &pts, Mat &image)
 		data_pts.at<double>(i, 0) = pts[i].x;
 		data_pts.at<double>(i, 1) = pts[i].y;
 	}
-	PCA pca_analysis(data_pts, Mat(), CV_PCA_DATA_AS_ROW);
+	PCA pca_analysis(data_pts, Mat(), CV_PCA_DATA_AS_ROW);//输入点的原始信息，也就是data_pts
 	Point cnt = Point(static_cast<int>(pca_analysis.mean.at<double>(0, 0)),
 		   static_cast<int>(pca_analysis.mean.at<double>(0,1)));
-
+	cout << cnt << endl;
 	circle(image, cnt, 2, Scalar(0, 255, 0), 2, 8, 0);
 	//STL技术
-	vector<Point2d> vecs(2);
-	vector<double>	vals(2);
+	imshow("center", image);
+	vector<Point2d> vecs(2);//特征向量
+	vector<double>	vals(2);//特征值
 	for (int i = 0; i < 2; i++)
 	{
-		vals[i] = pca_analysis.eigenvalues.at<double>(i, 0);
+		vals[i] = pca_analysis.eigenvalues.at<double>(i, 0);//特征值	
 		cout << "eigen value" << i << vals[i] << endl;
-		vecs[i] = Point2d(pca_analysis.eigenvectors.at<double>(i, 0), pca_analysis.eigenvectors.at<double>(i, 1));
+		vecs[i] = Point2d(pca_analysis.eigenvectors.at<double>(i, 0), pca_analysis.eigenvectors.at<double>(i, 1));//特征向量
 	}
 	Point p1 = cnt + 0.02*Point(static_cast<int>(vecs[0].x*vals[0]), static_cast<int>(vecs[0].y*vals[0]));
-	Point p2 = cnt + 0.02*Point(static_cast<int>(vecs[1].x*vals[1]), static_cast<int>(vecs[1].y*vals[1]));
+	Point p2 = cnt - 0.02*Point(static_cast<int>(vecs[1].x*vals[1]), static_cast<int>(vecs[1].y*vals[1]));
 
 	line(image, cnt, p1, Scalar(255, 0, 0), 2, 8, 0);
 	line(image, cnt, p2, Scalar(255, 255, 0), 2, 8, 0);

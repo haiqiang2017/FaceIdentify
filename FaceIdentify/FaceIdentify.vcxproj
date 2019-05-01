@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="face04.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mean2.cpp" />
     <ClCompile Include="pca.cpp" />
